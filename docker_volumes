@@ -1,0 +1,61 @@
+### Docker Volumes
+
+## docker volume helps to keep data between running containers.
+## on deleting container volume does not delete.
+
+
+# create a volume
+
+docker volume create myvol
+
+# inspect the volume
+
+docker volume inspect myvol
+
+# list the volumes
+
+dcoker volume ls
+
+# run a container with a volume
+
+docker run -d --name devtest -v myvol:/app nginx:latest
+
+# connect to the instance
+
+docker exec -it nginx bash
+
+cd app
+
+nano test.txt
+
+# stop and remove the container
+
+docker stop nginx
+
+docker rm -f nginx
+
+# run it again and see if the file still exists.
+
+docker run -d --name nginx -v myvol:/app nginx:latest
+
+docker exec -it nginx bash
+
+cd app
+
+cat test.txt
+
+# create docker volume
+
+docker volume create jenkins-data
+
+# attack docker volume
+
+docker run -d -p 8080:8080 -p 50000:500000 --name jenkins-docker -v jenkins-data:/var/jenkins_home jenkins:2.414.3-jdk17 
+
+docker exec -it jenkins-docker bash
+
+# inspect volume
+
+docker volume inspect jenkins-data
+
+cd var/jenkins_home
