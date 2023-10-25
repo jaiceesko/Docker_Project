@@ -1,0 +1,7 @@
+### Docker Compose
+
+# Installing Docker compose
+
+pip3 install -U docker-compose
+
+# create docker compose file
