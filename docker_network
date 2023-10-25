@@ -1,0 +1,56 @@
+# Docker Networking
+
+docker container run -p 8080:80 --name webhost -d nginx
+
+docker container port webhost
+
+# container Ip Address
+
+docker container inspect --format='{{json .NetworkSettings.IpAddress }}' webhost
+
+# Inspecting the network
+
+docker network inspect bridge
+
+# Remove a container from a network
+
+docker network disconnect bridge webhost
+
+# create your own bridge network
+
+docker network create -d bridge test_bridge
+
+docker network create my_app_net
+
+docker container run -d --name nginx --network my_app_net nginx
+
+docker network inspect my_app_net
+
+# show networks
+
+docker network ls
+
+# Add containers to a network
+
+docker run -d --net=test_bridge --name ubuntu ubuntu
+
+# Inspect container to see where it is connected.
+
+docker inspect --format='{{json .NetworkSettings.Networks}}' ubuntu
+
+# get the IP address of your container
+
+docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ubuntu
+
+# Open a running shell
+
+docker container exec -it ubuntu bash
+
+# Attach a running container to a network
+
+docker network connect test_bridge webhost
+
+
+# DNS Round Robin Test
+
+
