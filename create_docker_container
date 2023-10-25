@@ -1,0 +1,74 @@
+# Creating a Docker Container
+
+docker container run --publish 80:80 nginx:latest
+
+# Getting a shell inside a container
+
+docker run -it --name ubuntu ubuntu /bin/bash
+
+# To run a container in the background
+
+docker container run --publish 8080:80 detach --name webhost nginx:latest
+
+# Attach a shell to a container
+
+docker container exec -it webhost /bin/bash
+
+# To list containers
+
+docker container ls
+
+
+# To list all containers runnning and stopped.
+
+docker ps -a
+
+# Process list in one container
+
+docker container top
+
+# Details of one container config
+
+docker container inspect webhost
+
+# Performance stats for all containers
+
+docker container stats --all
+
+# To stop a container
+
+docker stop webhost
+
+# To restart a container
+
+docker start webhost
+
+# To kill a process or running container
+
+docker kill webhost
+
+# To remove a container
+
+docker rm -f webhost
+
+# Running Multiple containers
+
+docker container run -d -p 3306:3306 --name mysqldb -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+docker container logs mysqldb
+
+
+docker container run -d --name apache2webser -p 8080:80 httpd:latest
+
+
+docker container run -d --name proxy -p 80:80 nginx
+
+docker container ls
+
+# To stop the containers
+
+docker stop mysqldb apache2webserver proxy
+
+# to remove images
+
+docker rmi -f mysql httpd nginx
